@@ -44,67 +44,74 @@ This is what matters to me:
 Self-hosting solution
 https://nextcloud.com
 
-+ Overall good UI (4*)
-+ Can create multiple share links with own config (e.g. expiration)
-+ Audio player ("Music", not "Audio Player") is OK. Good integration with the
+* (+) Overall good UI (4*)
+* (+) Can create multiple share links with own config (e.g. expiration)
+* (+) Audio player ("Music", not "Audio Player") is OK. Good integration with the
   file browser, keeps playing while browsing other directories.
-* 3rd-party sync is possible using the "External storage support" plugin, but it
+* (~) 3rd-party sync is possible using the "External storage support" plugin, but it
   is not integrated with the internal file hierarchy.
 
 ## FileRun
 
 Web-based file browser with some extras
+
 https://filerun.com
 
-+ Very polished UI (5*)
-+ Nice audio player
-+ Integrates with any file-syncing backend (e.g. SyncThing)
-- Free version limited to 3 users (or 10 after contacting company)
-- Not open source
-- Only a single share link possible
+* (+) Very polished UI (5*)
+* (+) Nice audio player
+* (+) Integrates with any file-syncing backend (e.g. SyncThing)
+* (-) Free version limited to 3 users (or 10 after contacting company)
+* (-) Not open source
+* (-) Only a single share link possible
 
 ## Pydio Cells
 
 File sharing platform
+
 https://pydio.com
 
-+ Good, Clean UI (4*)
-* Integrates with any file-syncing backend, but requires some extra scripting
-  to sync the datasource on changes
-- Audio player not good, very basic
-- Only a single share link possible
+* (+) Good, Clean UI (4*)
+* (~) Integrates with any file-syncing backend, but requires some extra
+  scripting to sync the datasource on changes
+* (-) Audio player not good, very basic
+* (-) Only a single share link possible
 
 ## Seafile
 
+File sync and sharing platform
+
 https://www.seafile.com
 
-* Clean UI (3*), drag-n-drop not supported
-- Only a single share link possible
-- File-by-file audio player
-- Not meant to be integrated with a file-syncing backend
+* (~) Clean UI (3*), drag-n-drop not supported
+* (-) Only a single share link possible
+* (-) File-by-file audio player
+* (-) Not meant to be integrated with a file-syncing backend
 
 ## Cozy
 
 Personal data management platform
+
 https://github.com/cozy/cozy-stack
 
 Review is for the file-management app (drive)
 
-+ Clean UI (4*), with some bugs (e.g. menu not entirely visible)
-- Not meant to integrate with a file-syncing backend
-- Only a single share link possible (maybe extra links if sent by email?)
-- Basic file-by-file browser-native player
+* (+) Clean UI (4*), with some bugs (e.g. menu not entirely visible)
+* (-) Not meant to integrate with a file-syncing backend
+* (-) Only a single share link possible (maybe extra links if sent by email?)
+* (-) Basic file-by-file browser-native player
 
 ## ownCloud
 
 Similar to nextcloud, with a UI a bit less polished.
+
 https://owncloud.com
 
-* Overall okay UI, less nice than nextcloud (2*)
-- Only a single share link possible
-- Audio player is not very good
+* (~) Overall okay UI, less nice than nextcloud (2*)
+* (-) Only a single share link possible
+* (-) Audio player is not very good
 
 ## Mentions
 
 * KodExplorer: Virtual Desktop in a Browser (out of scope)
+  
   https://github.com/kalcaddle/KodExplorer
