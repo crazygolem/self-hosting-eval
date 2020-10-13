@@ -1,0 +1,25 @@
+#!/bin/bash
+
+podman pod create --name seafile \
+    --publish 127.0.0.1:8080:80 \
+    --add-host localhost.localdomain:127.0.0.1
+
+podman run -d --pod seafile \
+    -e MYSQL_ROOT_PASSWORD=seafile \
+    mariadb:10.1
+
+podman run -d --pod seafile \
+    memcached:1.5.6
+
+podman run -d --pod seafile \
+    -e DB_HOST=127.0.0.1 \
+    -e DB_ROOT_PASSWD=seafile \
+    -e SEAFILE_ADMIN_EMAIL=admin \
+    -e SEAFILE_ADMIN_PASSWORD=admin \
+    -e SEAFILE_SERVER_LETSENCRYPT=false \
+    -e SEAFILE_SERVER_HOSTNAME=localhost.localdomain:8080 \
+    seafileltd/seafile-mc:latest
+
+echo
+echo "Access your instance at http://localhost.localdomain:8080"
+echo "Use the credentials admin/admin to log in"

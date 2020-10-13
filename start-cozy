@@ -1,0 +1,57 @@
+#!/bin/bash
+
+set -e
+
+peek() {
+    __="$("$@" | tee /dev/tty)"
+}
+
+
+podman pod create --name cozy \
+    --publish 127.0.0.1:8443:8443
+
+
+# Cozy requires a reverse proxy serving the application in HTTPS, otherwise the
+# CSRF cookie is discarded by the browser and authentication is impossible, with
+# the error message "invalid csrf token".
+WD="$(mktemp -d)"
+openssl req -x509 -newkey rsa:4096 -nodes \
+    -subj '/CN=*.localhost.localdomain' -days 365 \
+    -keyout "$WD/key.pem" -out "$WD/cert.pem"
+
+podman run --pod cozy -d \
+    -v ./cozy-nginx.conf:/etc/nginx/conf.d/cozy.conf:ro \
+    -v "$WD/key.pem":/etc/cozy/key.pem:ro \
+    -v "$WD/cert.pem":/etc/cozy/cert.pem:ro \
+    nginx
+
+
+podman run --pod cozy -d \
+    -e COUCHDB_USER=cozy \
+    -e COUCHDB_PASSWORD=cozy \
+    couchdb:2.3
+
+peek podman run --pod cozy -d \
+    -e COUCHDB_HOST=localhost \
+    -e COZY_ADMIN_PASSWORD=cozy \
+    cozy/cozy-stack
+
+id="$__"
+
+# Wait for the cozy server (should be fast, sometimes it's not)
+sleep 2
+
+podman exec "$id" cozy-stack instances add \
+    --passphrase cozy \
+    --apps home,store,drive,photos,settings,contacts,notes \
+    localhost.localdomain:8443
+
+# Example: Installing extra applications
+#
+#     podman exec "$id" cozy-stack apps install \
+#         --domain=localhost.localdomain:8443 \
+#         store git://github.com/cozy/cozy-store.git#build
+
+echo
+echo "Access your instance at https://localhost.localdomain:8443"
+echo "Use the password 'cozy' to log in"

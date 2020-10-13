@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# KILLS ALL YOUR CONTAINERS
+# Even those not part of this project
+
+podman pod kill -a
+podman pod rm -af
+podman container kill -a
+podman container rm -af

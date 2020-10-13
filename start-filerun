@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -e
+
+podman pod create --name filerun \
+    --publish 127.0.0.1:8080:80
+
+podman run -d --pod filerun \
+    -e MYSQL_ROOT_PASSWORD=password \
+    -e MYSQL_USER=mysql \
+    -e MYSQL_PASSWORD=password \
+    -e MYSQL_DATABASE=filerun \
+    mariadb:10.1
+
+podman run -d --pod filerun \
+    -e FR_DB_HOST=127.0.0.1 \
+    -e FR_DB_PORT=3306 \
+    -e FR_DB_NAME=filerun \
+    -e FR_DB_USER=mysql \
+    -e FR_DB_PASS=password \
+    -e APACHE_RUN_USER=www-data \
+    -e APACHE_RUN_USER_ID=33 \
+    -e APACHE_RUN_GROUP=www-data \
+    -e APACHE_RUN_GROUP_ID=33 \
+    afian/filerun
+
+echo
+echo "Access your instance at http://localhost:8080"
+echo "Use the credentials superuser/superuser to log in"

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+podman pod create --name nextcloud \
+    --publish 127.0.0.1:8080:80
+
+podman run -d --pod nextcloud nextcloud
+
+echo
+echo "Access your instance at http://localhost:8080"

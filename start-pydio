@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+podman pod create --name pydio \
+    --publish 127.0.0.1:8080:80
+
+podman run -d --pod pydio \
+    -e MARIADB_ROOT_PASSWORD=password \
+    mariadb:latest
+
+podman run -d --pod pydio \
+    -e CELLS_NO_TLS=1 \
+    -e CELLS_BIND=0.0.0.0:80 \
+    -e CELLS_EXTERNAL=http://localhost:8080 \
+    pydio/cells
+
+echo
+echo "Access your instance at http://localhost:8080"
