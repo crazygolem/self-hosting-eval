@@ -7,3 +7,5 @@ podman pod kill -a
 podman pod rm -af
 podman container kill -a
 podman container rm -af
+
+rm -rf ./data/
