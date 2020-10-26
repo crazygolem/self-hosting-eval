@@ -154,11 +154,20 @@ https://github.com/deluan/navidrome
 
 ## TODO
 
+### LinShare
+
+https://www.linshare.org
+
 ### Filestash
 
 https://github.com/mickael-kerjean/filestash
 
-TODO
+
+### KeyCloak
+
+User management & Authentication (Federation IDP/Broker)
+
+https://www.keycloak.org
 
 
 ## Mentions
